@@ -6,7 +6,11 @@ const app = express();
 
 const port = 5000;
 
+// use EJS as the view engine
 app.set("view engine", "ejs");
+
+// static file
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.render("login");
