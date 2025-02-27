@@ -15,7 +15,8 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("login");
+  const message = req.query.message || null; // Get the message if it exists in the URL
+  res.render("login", { message }); // Pass it to the login page
 });
 
 app.get("/signup", (req, res) => {
@@ -43,6 +44,9 @@ app.post("/signup", async (req, res) => {
 
     const userdata = await collection.insertMany(data);
     console.log(userdata);
+
+    // Redirect to login page after successful registration
+    res.redirect("/?message=User+registered+successfully");
   }
 });
 

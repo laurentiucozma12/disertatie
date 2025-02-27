@@ -1,62 +1,96 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* General Styles */
 body {
-  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f4f7f6;
+  color: #333;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
+/* Container for the login form */
+.form-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Form Header */
 h2 {
   text-align: center;
-  margin-bottom: 30px;
+  color: #4c4c4c;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.form-container {
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
+/* Success message styles */
+.success-message {
+  background-color: #dff0d8;
+  border: 1px solid #d0e9c6;
+  color: #3c763d;
+  padding: 10px;
+  margin-bottom: 20px;
   border-radius: 5px;
+  text-align: center;
 }
 
+/* Form Group */
 .form-group {
   margin-bottom: 15px;
 }
 
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+/* Label styles */
+label {
+  font-size: 0.9rem;
+  color: #666;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-.submit-btn {
-  display: block;
+/* Input fields */
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 10px;
-  background-color: #472dbb;
-  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* Button styles */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: #ffffff;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.submit-btn:hover {
-  background-color: #4565a0;
+button[type="submit"]:hover {
+  background-color: #45a049;
 }
 
+/* Link style for redirecting to signup */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Additional styling for spacing */
 p {
-  margin-top: 15px;
+  text-align: center;
+  margin-top: 10px;
 }
