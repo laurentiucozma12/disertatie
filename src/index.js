@@ -46,7 +46,7 @@ app.post("/register", async (req, res) => {
     console.log(userdata);
 
     // Redirect to login page after successful registration
-    res.redirect("/login?message=User+registered+successfully");
+    res.redirect("/login?message=User+registered+successfully!");
   }
 });
 
