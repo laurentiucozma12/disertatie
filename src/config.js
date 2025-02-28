@@ -12,7 +12,11 @@ connect
 
 // Create Schema
 const Loginschema = new mongoose.Schema({
-  name: {
+  email: {
+    type: String,
+    required: true,
+  },
+  username: {
     type: String,
     required: true,
   },

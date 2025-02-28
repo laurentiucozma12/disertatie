@@ -51,8 +51,7 @@ label {
 }
 
 /* Input fields */
-input[type="text"],
-input[type="password"] {
+.input-auth {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;

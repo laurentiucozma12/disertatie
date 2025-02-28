@@ -3,21 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SignUp</title>
+    <title>Register</title>
 
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <div class="form-container">
-      <h2>SignUp</h2>
-      <form action="/signup" method="post">
+      <h2>Register</h2>
+      <form action="/register" method="post">
         <div class="form-group">
-          <label for="name">Name:</label>
+          <label for="email">Email:</label>
           <input
+            class="input-auth"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-group">
+          <label for="name">Username:</label>
+          <input
+            class="input-auth"
             type="text"
-            id="name"
+            id="username"
             name="username"
-            placeholder="Enter your name"
+            placeholder="Enter your username"
             required
             autocomplete="off"
           />
@@ -25,16 +38,17 @@
         <div class="form-group">
           <label for="password">Password:</label>
           <input
+            class="input-auth"
             type="password"
             id="password"
             name="password"
-            placeholder="password"
+            placeholder="Enter your password"
             required
           />
         </div>
         <button type="submit" class="submit-btn">Submit</button>
       </form>
-      <p>Already have an account? <a class="link" href="/">Login</a></p>
+      <p>Already have an account? <a class="link" href="/login">Login</a></p>
     </div>
   </body>
 </html>

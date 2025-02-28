@@ -15,26 +15,26 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  const message = req.query.message || null; // Get the message if it exists in the URL
-  res.render("login", { message }); // Pass it to the login page
+  res.render("home");
 });
 
-app.get("/signup", (req, res) => {
-  res.render("signup");
+app.get("/register", (req, res) => {
+  res.render("register");
 });
 
 // Register User
-app.post("/signup", async (req, res) => {
+app.post("/register", async (req, res) => {
   const data = {
-    name: req.body.username,
+    email: req.body.email,
+    username: req.body.username,
     password: req.body.password,
   };
 
-  // Check if the username already exists in the database
-  const existingUser = await collection.findOne({ name: data.name });
+  // Check if the email already exists in the database
+  const existingUser = await collection.findOne({ email: data.email });
 
   if (existingUser) {
-    res.send("User already exists. Please choose a different username.");
+    res.send("Email already exists. Please choose a different email.");
   } else {
     // Hash the password using bcrypt
     const saltRounds = 10; // Number of salt rounds for bcrypt
@@ -46,16 +46,21 @@ app.post("/signup", async (req, res) => {
     console.log(userdata);
 
     // Redirect to login page after successful registration
-    res.redirect("/?message=User+registered+successfully");
+    res.redirect("/login?message=User+registered+successfully");
   }
+});
+
+app.get("/login", (req, res) => {
+  const message = req.query.message || null; // Get the message if it exists in the URL
+  res.render("login", { message }); // Pass it to the login page
 });
 
 // Login user
 app.post("/login", async (req, res) => {
   try {
-    const check = await collection.findOne({ name: req.body.username });
+    const check = await collection.findOne({ email: req.body.email });
     if (!check) {
-      res.send("User name cannot be found");
+      res.send("User name cannot be found with this email");
     }
     // Compare the hashed password from the database with the plaintext password
     const isPasswordMatch = await bcrypt.compare(
@@ -65,11 +70,15 @@ app.post("/login", async (req, res) => {
     if (!isPasswordMatch) {
       res.send("wrong Password");
     } else {
-      res.render("home");
+      res.redirect("dashboard");
     }
   } catch {
     res.send("wrong Details");
   }
+});
+
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard");
 });
 
 // Define Port for Application
