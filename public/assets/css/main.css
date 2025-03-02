@@ -95,9 +95,6 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
-.footer {
-  border-top: solid 1px #78b772;
-}
 
 article,
 aside,
@@ -4033,6 +4030,7 @@ body.is-menu-visible #menu .inner {
   display: flex;
   justify-content: center;
 }
+
 .auth-container {
   padding: 0 2.5em;
   width: fit-content;
@@ -4051,4 +4049,8 @@ label {
 .success-message {
   margin-top: 2em;
   font-weight: 900;
+}
+
+.footer {
+  border-top: solid 1px #78b772;
 }
