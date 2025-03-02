@@ -4054,3 +4054,23 @@ label {
 .footer {
   border-top: solid 1px #78b772;
 }
+
+.invoices {
+  display: flex;
+  justify-content: center;
+}
+
+.invoices-container {
+  border: 1px solid #78b772 !important;
+  margin: 2em;
+  padding: 2em 2em 0 2em;
+  width: 600px;
+}
+
+.invoices-container h2 {
+  margin-bottom: 0.5em;
+}
+
+.invoices-container .question-input {
+  margin-bottom: 1em;
+}
