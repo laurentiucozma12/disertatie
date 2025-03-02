@@ -31,7 +31,7 @@ metaForm.addEventListener("submit", async (e) => {
   formData.append("question", question); // Send question with files
 
   try {
-    const res = await fetch("http://localhost:4000/upload-invoice", {
+    const res = await fetch("http://localhost:5000/dashboard/upload-invoice", {
       method: "POST",
       body: formData, // Send multiple files
     });
