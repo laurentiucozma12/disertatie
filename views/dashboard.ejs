@@ -40,7 +40,31 @@
       </nav>
 
       <!-- Main -->
-      <div id="main">Main</div>
+      <div id="main">
+        <form class="meta-form">
+          <h2>Upload your invoices</h2>
+
+          <label for="invoice">
+            <input
+              type="file"
+              id="invoice"
+              name="invoice"
+              accept="application/pdf"
+              multiple
+            />
+          </label>
+
+          <h2>Ask a question</h2>
+          <label for="title">
+            <input type="text" name="title" />
+            <button>Generate Response</button>
+          </label>
+        </form>
+
+        <div class="description">
+          <p>Your answer...</p>
+        </div>
+      </div>
 
       <!-- Footer -->
       <footer id="footer" class="footer">
@@ -75,5 +99,6 @@
     <script src="/assets/js/breakpoints.min.js"></script>
     <script src="/assets/js/util.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/invoices.js"></script>
   </body>
 </html>
