@@ -60,17 +60,18 @@ app.post("/login", async (req, res) => {
   try {
     const check = await collection.findOne({ email: req.body.email });
     if (!check) {
-      res.send("User name cannot be found with this email");
-    }
-    // Compare the hashed password from the database with the plaintext password
-    const isPasswordMatch = await bcrypt.compare(
-      req.body.password,
-      check.password
-    );
-    if (!isPasswordMatch) {
-      res.send("wrong Password");
+      res.redirect("/login?message=User+name+cannot+be+found+with+this+email!");
     } else {
-      res.redirect("dashboard");
+      // Compare the hashed password from the database with the plaintext password
+      const isPasswordMatch = await bcrypt.compare(
+        req.body.password,
+        check.password
+      );
+      if (!isPasswordMatch) {
+        res.send("wrong Password");
+      } else {
+        res.redirect("dashboard");
+      }
     }
   } catch {
     res.send("wrong Details");

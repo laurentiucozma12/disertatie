@@ -1,45 +1,116 @@
 <!DOCTYPE html>
+
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Invoice AI | Login</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Invoice AI</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="/assets/css/noscript.css"
+    /></noscript>
   </head>
-  <body class="bg-image">
-    <div class="wrapper">
-      <form action="/login" method="post">
-        <h2>Login</h2>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header" class="alt">
+        <a href="/" class="logo"
+          ><strong>Invoice AI</strong> <span>by Laurențiu Cozma</span></a
+        >
+        <nav>
+          <a href="#menu">Menu</a>
+        </nav>
+      </header>
 
-        <!-- Show success message if available -->
-        <% if (message) { %>
-        <div class="success-message"><%= message %></div>
-        <% } %>
-        <div class="input-field">
-          <input
-            type="text"
-            id="email"
-            name="email"
-            autocomplete="off"
-            required
-          />
-          <label>Enter your email</label>
+      <!-- Menu -->
+      <nav id="menu">
+        <ul class="links">
+          <li><a href="/">Home</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <ul class="actions stacked">
+          <li><a href="/login" class="button fit">Log In</a></li>
+        </ul>
+        <ul class="actions stacked">
+          <li><a href="/register" class="button fit">Register</a></li>
+        </ul>
+      </nav>
+
+      <!-- Register -->
+      <section>
+        <form action="/login" method="post" class="auth">
+          <div class="auth-container inner">
+            <% if (message) { %>
+            <div class="success-message"><%= message %></div>
+            <% } %>
+            <div class="fields">
+              <div class="field half">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="off"
+                  required
+                />
+              </div>
+              <div class="field half">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  autocomplete="off"
+                  required
+                />
+              </div>
+            </div>
+            <ul class="actions">
+              <li>
+                <input type="submit" value="Login" class="primary" />
+              </li>
+            </ul>
+            <p>Don't have an account? <a href="/register">Register</a></p>
+          </div>
+        </form>
+      </section>
+
+      <!-- Footer -->
+      <footer id="footer" class="footer">
+        <div class="inner">
+          <ul class="icons">
+            <li>
+              <a
+                href="https://github.com/laurentiucozma12"
+                target="_blank"
+                class="icon brands alt fa-github"
+                ><span class="label">GitHub</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/laurentiu-cozma/"
+                target="_blank"
+                class="icon brands alt fa-linkedin-in"
+                ><span class="label">LinkedIn</span></a
+              >
+            </li>
+          </ul>
         </div>
-        <div class="input-field">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            autocomplete="off"
-            required
-          />
-          <label>Enter your password</label>
-        </div>
-        <button class="auth-submit-btn" type="submit">Log In</button>
-        <div class="register">
-          <p>Don't have an account? <a href="/register">Register</a></p>
-        </div>
-      </form>
+      </footer>
     </div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
   </body>
 </html>

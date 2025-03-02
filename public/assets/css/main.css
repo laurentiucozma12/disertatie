@@ -95,7 +95,6 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
-
 .footer {
   border-top: solid 1px #78b772;
 }
@@ -4039,4 +4038,17 @@ body.is-menu-visible #menu .inner {
   width: fit-content;
   border: solid 1px #78b772;
   width: 500px;
+}
+
+label {
+  margin: 0;
+}
+
+.field {
+  margin-top: 1em;
+}
+
+.success-message {
+  margin-top: 2em;
+  font-weight: 900;
 }
