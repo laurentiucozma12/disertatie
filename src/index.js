@@ -11,27 +11,27 @@ const fs = require("fs");
 const pdfParse = require("pdf-parse");
 const { OpenAI } = require("openai");
 
-const app = express();
+const server = express();
 // convert data into json format
-app.use(express.json());
+server.use(express.json());
 
 // Static file
-app.use(express.static("public"));
+server.use(express.static("public"));
 
-app.use(express.urlencoded({ extended: false }));
+server.use(express.urlencoded({ extended: false }));
 //use EJS as the view engine
-app.set("view engine", "ejs");
+server.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
+server.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/register", (req, res) => {
+server.get("/register", (req, res) => {
   res.render("register");
 });
 
 // Register User
-app.post("/register", async (req, res) => {
+server.post("/register", async (req, res) => {
   const data = {
     email: req.body.email,
     username: req.body.username,
@@ -58,13 +58,13 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get("/login", (req, res) => {
+server.get("/login", (req, res) => {
   const message = req.query.message || null; // Get the message if it exists in the URL
   res.render("login", { message }); // Pass it to the login page
 });
 
 // Login user
-app.post("/login", async (req, res) => {
+server.post("/login", async (req, res) => {
   try {
     const check = await collection.findOne({ email: req.body.email });
     if (!check) {
@@ -85,17 +85,17 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/dashboard", (req, res) => {
+server.get("/dashboard", (req, res) => {
   res.render("dashboard");
 });
 
 // OPEN AI
 const upload = multer({ dest: "uploads/" });
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+server.use(express.static("public"));
 
 // 🔑 Verifică dacă cheia API este definită
 if (!process.env.OPENAI_API_KEY) {
@@ -134,7 +134,7 @@ async function processInvoices(files) {
 }
 
 // ✅ Endpoint pentru încărcarea facturilor și generarea răspunsului
-app.post(
+server.post(
   "/dashboard/upload-invoice",
   upload.array("invoices", 10),
   async (req, res) => {
@@ -171,6 +171,6 @@ app.post(
 
 // Define Port for Application
 const port = 5000;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
