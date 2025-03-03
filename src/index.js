@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const bcrypt = require("bcrypt");
-const collection = require("../src/config/config");
+const userCollection = require("../src/config/config");
 
 const multer = require("multer");
 const cors = require("cors");
@@ -19,10 +19,15 @@ server.use(express.json());
 server.use(express.static("public"));
 
 server.use(express.urlencoded({ extended: false }));
+
 //use EJS as the view engine
 server.set("view engine", "ejs");
 
 server.get("/", (req, res) => {
+  res.render("home");
+});
+
+server.get("/logout", (req, res) => {
   res.render("home");
 });
 
@@ -39,7 +44,7 @@ server.post("/register", async (req, res) => {
   };
 
   // Check if the email already exists in the database
-  const existingUser = await collection.findOne({ email: data.email });
+  const existingUser = await userCollection.findOne({ email: data.email });
 
   if (existingUser) {
     res.send("Email already exists. Please choose a different email.");
@@ -50,7 +55,7 @@ server.post("/register", async (req, res) => {
 
     data.password = hashedPassword; // Replace the original password with the hashed one
 
-    const userdata = await collection.insertMany(data);
+    const userdata = await userCollection.insertMany(data);
     console.log(userdata);
 
     // Redirect to login page after successful registration
@@ -66,9 +71,12 @@ server.get("/login", (req, res) => {
 // Login user
 server.post("/login", async (req, res) => {
   try {
-    const check = await collection.findOne({ email: req.body.email });
+    const check = await userCollection.findOne({ email: req.body.email });
+    console.log(check); // null
     if (!check) {
-      res.send("User name cannot be found with this email");
+      return res.redirect(
+        "/login?message=User+name+cannot+be+found+with+this+email!"
+      );
     }
     // Compare the hashed password from the database with the plaintext password
     const isPasswordMatch = await bcrypt.compare(
