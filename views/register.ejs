@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <title>Invoice AI | Register</title>
@@ -86,38 +85,10 @@
         </form>
       </section>
 
-      <!-- Footer -->
-      <footer id="footer" class="footer">
-        <div class="inner">
-          <ul class="icons">
-            <li>
-              <a
-                href="https://github.com/laurentiucozma12"
-                target="_blank"
-                class="icon brands alt fa-github"
-                ><span class="label">GitHub</span></a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/in/laurentiu-cozma/"
-                target="_blank"
-                class="icon brands alt fa-linkedin-in"
-                ><span class="label">LinkedIn</span></a
-              >
-            </li>
-          </ul>
-        </div>
-      </footer>
+      <%- include('layouts/footer.ejs') %>
     </div>
 
     <!-- Scripts -->
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/jquery.scrolly.min.js"></script>
-    <script src="/assets/js/jquery.scrollex.min.js"></script>
-    <script src="/assets/js/browser.min.js"></script>
-    <script src="/assets/js/breakpoints.min.js"></script>
-    <script src="/assets/js/util.js"></script>
-    <script src="/assets/js/main.js"></script>
+    <%- include('layouts/scripts.ejs') %>
   </body>
 </html>
