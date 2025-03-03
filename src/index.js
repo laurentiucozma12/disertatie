@@ -2,8 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const path = require("path");
-const bcrypt = require("bcrypt");
-const userCollection = require("../src/config/config");
+const session = require("express-session");
 
 const multer = require("multer");
 const cors = require("cors");
@@ -11,91 +10,51 @@ const fs = require("fs");
 const pdfParse = require("pdf-parse");
 const { OpenAI } = require("openai");
 
-const server = express();
-// convert data into json format
-server.use(express.json());
+const homeRoutes = require("./routes/homeRoutes");
+const loginRoutes = require("./routes/loginRoutes");
+const registerRoutes = require("./routes/registerRoutes");
+const logoutRoutes = require("./routes/logoutRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
+const { requireAuth } = require("./middleware/authMiddleware");
 
-// Static file
+const router = express.Router();
+
+router.get("/dashboard", requireAuth, (req, res) => {
+  res.render("dashboard", { user: req.session.user });
+});
+
+module.exports = router;
+
+const server = express();
+
+// Middleware
+server.use(express.json());
+server.use(express.urlencoded({ extended: false }));
 server.use(express.static("public"));
 
-server.use(express.urlencoded({ extended: false }));
+server.use(
+  session({
+    secret: "mySecretKey",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 
-//use EJS as the view engine
+server.use(cors());
+
+// Set view engine to EJS
 server.set("view engine", "ejs");
 
-server.get("/", (req, res) => {
-  res.render("home");
-});
+// Set the path to views folder
+server.set("views", path.join(__dirname, "..", "views"));
 
-server.get("/logout", (req, res) => {
-  res.render("home");
-});
-
-server.get("/register", (req, res) => {
-  res.render("register");
-});
-
-// Register User
-server.post("/register", async (req, res) => {
-  const data = {
-    email: req.body.email,
-    username: req.body.username,
-    password: req.body.password,
-  };
-
-  // Check if the email already exists in the database
-  const existingUser = await userCollection.findOne({ email: data.email });
-
-  if (existingUser) {
-    res.send("Email already exists. Please choose a different email.");
-  } else {
-    // Hash the password using bcrypt
-    const saltRounds = 10; // Number of salt rounds for bcrypt
-    const hashedPassword = await bcrypt.hash(data.password, saltRounds);
-
-    data.password = hashedPassword; // Replace the original password with the hashed one
-
-    const userdata = await userCollection.insertMany(data);
-    console.log(userdata);
-
-    // Redirect to login page after successful registration
-    res.redirect("/login?message=User+registered+successfully!");
-  }
-});
-
-server.get("/login", (req, res) => {
-  const message = req.query.message || null; // Get the message if it exists in the URL
-  res.render("login", { message }); // Pass it to the login page
-});
-
-// Login user
-server.post("/login", async (req, res) => {
-  try {
-    const check = await userCollection.findOne({ email: req.body.email });
-    console.log(check); // null
-    if (!check) {
-      return res.redirect(
-        "/login?message=User+name+cannot+be+found+with+this+email!"
-      );
-    }
-    // Compare the hashed password from the database with the plaintext password
-    const isPasswordMatch = await bcrypt.compare(
-      req.body.password,
-      check.password
-    );
-    if (!isPasswordMatch) {
-      res.send("wrong Password");
-    } else {
-      res.redirect("dashboard");
-    }
-  } catch {
-    res.send("wrong Details");
-  }
-});
-
-server.get("/dashboard", (req, res) => {
-  res.render("dashboard");
-});
+// Rute principale
+server.use("/", homeRoutes);
+server.use("/register", registerRoutes);
+server.use("/login", loginRoutes);
+server.use("/logout", logoutRoutes);
+server.use("/dashboard", dashboardRoutes);
 
 // OPEN AI
 const upload = multer({ dest: "uploads/" });
