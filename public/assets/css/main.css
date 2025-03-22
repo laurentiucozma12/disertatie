@@ -251,7 +251,6 @@ a {
     border-bottom-color 0.2s ease-in-out;
   -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-  border-bottom: dotted 1px;
   color: inherit;
   text-decoration: none;
 }
@@ -3667,7 +3666,7 @@ body.is-preload #banner > .inner {
   background-color: #2a2f4a;
 }
 
-#main > * {
+#main {
   border-top: solid 1px #68a063;
 }
 
@@ -4077,4 +4076,29 @@ label {
 
 .invoices-container .question-input {
   margin-bottom: 1em;
+}
+
+.dashboard-main {
+  border-top: 0 !important;
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.domain-container {
+  height: fit-content;
+  padding: 0.5em 1.5em;
+  border-radius: 10px;
+  margin: 1.5em 2em;
+  background-color: #459b42;
+}
+
+.domain-container:hover {
+  background-color: #3c873a;
+}
+
+.domain-container {
+  font-size: 28pt;
+  text-decoration: none !important;
 }
