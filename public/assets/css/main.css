@@ -4067,6 +4067,10 @@ label {
   width: 600px;
 }
 
+.invoices-container h1 {
+  margin-bottom: 0;
+}
+
 .invoices-container h2 {
   margin-bottom: 0.5em;
 }

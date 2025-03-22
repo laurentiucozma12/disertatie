@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Invoice AI | Sales</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="/assets/css/noscript.css"
+    /></noscript>
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header" class="alt">
+        <a href="/dashboard" class="logo"
+          ><strong>Invoice AI</strong> <span>by Laurențiu Cozma</span></a
+        >
+        <nav>
+          <a href="#menu">Menu</a>
+        </nav>
+      </header>
+
+      <!-- Menu -->
+      <nav id="menu">
+        <ul class="links">
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <ul class="actions stacked">
+          <li><a href="/logout" class="button fit">Logout</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main -->
+      <div id="main" class="invoices">
+        <div class="invoices-container">
+          <form class="meta-form">
+            <h1>Sales</h1>
+            <h2>Upload your invoices</h2>
+
+            <label for="invoice">
+              <input
+                type="file"
+                id="invoice"
+                name="invoice"
+                accept="application/pdf"
+                multiple
+              />
+            </label>
+
+            <h2>Ask a question</h2>
+            <label for="title">
+              <input type="text" name="title" class="question-input" />
+              <button>Generate Response</button>
+            </label>
+          </form>
+
+          <div class="description">
+            <p>Your answer will be displayed here...</p>
+          </div>
+        </div>
+      </div>
+
+      <%- include('layouts/footer.ejs') %>
+    </div>
+
+    <!-- Scripts -->
+    <%- include('layouts/scripts.ejs') %>
+    <script src="/assets/js/invoices.js"></script>
+  </body>
+</html>

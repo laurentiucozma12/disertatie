@@ -15,12 +15,17 @@ const loginRoutes = require("./routes/loginRoutes");
 const registerRoutes = require("./routes/registerRoutes");
 const logoutRoutes = require("./routes/logoutRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const salesRoutes = require("./routes/salesRoutes");
 const { requireAuth } = require("./middleware/authMiddleware");
 
 const router = express.Router();
 
 router.get("/dashboard", requireAuth, (req, res) => {
   res.render("dashboard", { user: req.session.user });
+});
+
+router.get("/sales", requireAuth, (req, res) => {
+  res.render("sales", { user: req.session.user });
 });
 
 module.exports = router;
@@ -55,6 +60,7 @@ server.use("/register", registerRoutes);
 server.use("/login", loginRoutes);
 server.use("/logout", logoutRoutes);
 server.use("/dashboard", dashboardRoutes);
+server.use("/sales", salesRoutes);
 
 // OPEN AI
 const upload = multer({ dest: "uploads/" });
@@ -102,7 +108,7 @@ async function processInvoices(files) {
 
 // ✅ Endpoint pentru încărcarea facturilor și generarea răspunsului
 server.post(
-  "/dashboard/upload-invoice",
+  "/sales/upload-invoice",
   upload.array("invoices", 10),
   async (req, res) => {
     console.log("📂 Uploaded Files:", req.files);
