@@ -1,7 +1,7 @@
 const openai = require("../config/openaiConfig"); // Import the openai instance
 
 const generateMeta = async (req, res) => {
-  const { title } = req.body;
+  const { userMessage } = req.body;
 
   try {
     const response = await openai.chat.completions.create({
@@ -9,7 +9,7 @@ const generateMeta = async (req, res) => {
       messages: [
         {
           role: "user",
-          content: `Come up with a description for a YouTube video called "${title}"`,
+          content: ` "${userMessage}"`,
         },
       ],
       max_tokens: 100,

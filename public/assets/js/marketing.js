@@ -31,17 +31,17 @@ metaForm.addEventListener("submit", async (e) => {
   formData.append("question", question); // Send question with files
 
   try {
-    const res = await fetch("http://localhost:5000/dashboard/upload-invoice", {
+    const res = await fetch("http://localhost:5000/marketing/upload-invoice", {
       method: "POST",
       body: formData, // Send multiple files
     });
 
-    // ✅ Verificare dacă serverul răspunde corect
+    // Check if the server is responding correctly
     if (!res.ok) {
       throw new Error(`Server error: ${res.status} ${res.statusText}`);
     }
 
-    // ✅ Verificare dacă răspunsul este JSON valid
+    // Check if the response is valid JSON
     let data;
     try {
       data = await res.json();
@@ -51,7 +51,7 @@ metaForm.addEventListener("submit", async (e) => {
 
     console.log("API Response:", data);
 
-    // ✅ Verificare dacă serverul a trimis un răspuns valid
+    // Check if the server sent a valid response
     if (data?.response) {
       description.textContent = data.response; // Update page with response
     } else {
