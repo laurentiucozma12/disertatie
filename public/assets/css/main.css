@@ -4102,3 +4102,47 @@ label {
 .domain-container:hover {
   background-color: #3c873a;
 }
+
+.sales-img {
+  background-image: url("/images/sales.png");
+}
+
+.marketing-img {
+  background-image: url("/images/marketing.png");
+}
+
+.accounting-img {
+  background-image: url("/images/accounting.png");
+}
+
+.hr-img {
+  background-image: url("/images/hr.png");
+}
+
+.legal-img {
+  background-image: url("/images/legal.png");
+}
+
+.page-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+}
+
+.page-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsla(231, 28%, 23%, 0.9);
+}
+
+.invoices-container {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
