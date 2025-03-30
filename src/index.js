@@ -18,6 +18,8 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const salesRoutes = require("./routes/salesRoutes");
 const marketingRoutes = require("./routes/marketingRoutes");
 const accountingRoutes = require("./routes/accountingRoutes");
+const humanResourcesRoutes = require("./routes/humanResourcesRoutes");
+const legalAdvisoryRoutes = require("./routes/legalAdvisoryRoutes");
 const { requireAuth } = require("./middleware/authMiddleware");
 
 const router = express.Router();
@@ -36,6 +38,14 @@ router.get("/marketing", requireAuth, (req, res) => {
 
 router.get("/accounting", requireAuth, (req, res) => {
   res.render("accounting", { user: req.session.user });
+});
+
+router.get("/human-resources", requireAuth, (req, res) => {
+  res.render("humanResources", { user: req.session.user });
+});
+
+router.get("/legal-advisory", requireAuth, (req, res) => {
+  res.render("legalAdvisory", { user: req.session.user });
 });
 
 module.exports = router;
@@ -73,6 +83,8 @@ server.use("/dashboard", dashboardRoutes);
 server.use("/sales", salesRoutes);
 server.use("/marketing", marketingRoutes);
 server.use("/accounting", accountingRoutes);
+server.use("/human-resources", humanResourcesRoutes);
+server.use("/legal-advisory", legalAdvisoryRoutes);
 
 // OPEN AI
 const upload = multer({ dest: "uploads/" });
@@ -220,6 +232,84 @@ server.post(
           {
             role: "system",
             content: "You are an expert accountant",
+          },
+          { role: "user", content: prompt },
+        ],
+      });
+
+      res.json({ response: aiResponse.choices[0].message.content });
+    } catch (error) {
+      console.error("❌ Error OpenAI:", error);
+      res
+        .status(500)
+        .json({ error: "An error occurred when generating the AI response." });
+    }
+  }
+);
+
+// Legal Advisor - Endpoint for invoices loading and generating responses
+server.post(
+  "/legal-advisory/upload-invoice",
+  upload.array("invoices", 10),
+  async (req, res) => {
+    console.log("📂 Uploaded Files:", req.files);
+    console.log("❓ User Question:", req.body.question);
+
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: "You didn't upload any invoices." });
+    }
+
+    const invoiceText = await processInvoices(req.files);
+
+    // Building the AI prompt
+    const prompt = `The following are the uploaded invoices:\n${invoiceText}\n\nThe user's question is:"${req.body.question}".\nAnswer clearly and concisely.`;
+
+    try {
+      const aiResponse = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: "You are an expert legal advisor",
+          },
+          { role: "user", content: prompt },
+        ],
+      });
+
+      res.json({ response: aiResponse.choices[0].message.content });
+    } catch (error) {
+      console.error("❌ Error OpenAI:", error);
+      res
+        .status(500)
+        .json({ error: "An error occurred when generating the AI response." });
+    }
+  }
+);
+
+// Human Resources - Endpoint for invoices loading and generating responses
+server.post(
+  "/human-resources/upload-invoice",
+  upload.array("invoices", 10),
+  async (req, res) => {
+    console.log("📂 Uploaded Files:", req.files);
+    console.log("❓ User Question:", req.body.question);
+
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: "You didn't upload any invoices." });
+    }
+
+    const invoiceText = await processInvoices(req.files);
+
+    // Building the AI prompt
+    const prompt = `The following are the uploaded invoices:\n${invoiceText}\n\nThe user's question is:"${req.body.question}".\nAnswer clearly and concisely.`;
+
+    try {
+      const aiResponse = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: "You are an expert human resources",
           },
           { role: "user", content: prompt },
         ],

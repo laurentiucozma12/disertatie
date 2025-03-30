@@ -15,26 +15,8 @@
   <body class="is-preload">
     <!-- Wrapper -->
     <div id="wrapper">
-      <!-- Header -->
-      <header id="header" class="alt">
-        <a href="/dashboard" class="logo"><strong>Corporate AI</strong></a>
-        <nav>
-          <a href="#menu">Menu</a>
-        </nav>
-      </header>
-
       <!-- Menu -->
-      <nav id="menu">
-        <ul class="links">
-          <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="/sales">Sales</a></li>
-          <li><a href="/marketing">Marketing</a></li>
-          <li><a href="/accounting">Accounting</a></li>
-        </ul>
-        <ul class="actions stacked">
-          <li><a href="/logout" class="button fit">Logout</a></li>
-        </ul>
-      </nav>
+      <%- include('layouts/dashboardMenu.ejs') %>
 
       <!-- Main -->
       <div id="main" class="invoices">
