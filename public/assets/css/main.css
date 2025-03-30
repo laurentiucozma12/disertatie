@@ -4079,25 +4079,26 @@ label {
 }
 
 .dashboard-main {
-  border-top: 0 !important;
-  padding-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-top: 0 !important;
 }
 
 .domain-container {
-  height: fit-content;
-  padding: 0.5em 1.5em;
-  border-radius: 10px;
-  margin: 1.5em 1em;
+  flex-grow: 1;
+  padding: 75px 0;
+  text-align: center;
   background-color: #459b42;
+  border: 2px solid #3c873a;
+  font-size: 24pt;
+  text-decoration: none !important;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
 .domain-container:hover {
   background-color: #3c873a;
-}
-
-.domain-container {
-  font-size: 28pt;
-  text-decoration: none !important;
 }
