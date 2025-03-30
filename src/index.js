@@ -141,7 +141,7 @@ server.post(
         messages: [
           {
             role: "system",
-            content: "You are an expert sales agent.",
+            content: "You are an expert sales agent.", // in ce format sa returneze raspunsul, sa dau niste sabloane de raspunsuri, pot sa dau explicatii foarte precise; ex daca un utilizator cere calcule foarte complicate sa nu
           },
           { role: "user", content: prompt },
         ],
