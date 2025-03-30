@@ -4146,3 +4146,37 @@ label {
   z-index: 2;
   color: white;
 }
+
+.hero {
+  position: relative;
+  background-image: url("/images/hero-bg.png"); /* Make sure the path is correct */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Adjust opacity for transparency */
+}
+
+.hero-content {
+  position: relative; /* Ensures text is above the overlay */
+  z-index: 1;
+}
+
+.project-info {
+  padding: 50px;
+  text-align: left;
+}
